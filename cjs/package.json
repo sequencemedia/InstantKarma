@@ -10,13 +10,14 @@
   "author": "Jonathan Perry",
   "license": "MIT",
   "dependencies": {
-    "angular": "^1.4.5",
     "express": "^4.12.3"
   },
   "devDependencies": {
+    "angular": "^1.4.5",
     "angular-mocks": "^1.4.5",
     "bardjs": "^0.1.8",
     "chai": "^3.2.0",
+    "eventemitter3": "^1.1.1",
     "gulp": "^3.8.11",
     "gulp-compass": "^2.1.0",
     "gulp-develop-server": "^0.4.3",
@@ -29,13 +30,15 @@
     "karma": "^0.13.9",
     "karma-chai": "^0.1.0",
     "karma-chai-sinon": "^0.1.5",
+    "karma-commonjs": "^0.0.13",
     "karma-mocha": "^0.2.0",
+    "karma-mocha-chai-sinon": "0.0.7",
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-requirejs": "^0.2.2",
     "mocha": "^2.3.0",
     "phantomjs": "^1.9.18",
     "requirejs": "^2.1.20",
-    "sinon": "^1.16.1",
+    "sinon": "^1.10.1",
     "sinon-chai": "^2.8.0"
   }
 }

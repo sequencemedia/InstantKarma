@@ -31,9 +31,17 @@ gulp.task('server', function () {
 gulp.task('watch', function () {
 	gulp
 		.watch(config.jshint.all, ['lint']);
+	gulp
+		.watch(config.jshint.all, ['test']);
 });
 
 gulp.task('watch-server', function () {
 	gulp
 		.watch(['app'], server.restart);
+});
+
+gulp.task('webpack', function () {
+	return gulp.src([])
+		.pipe(webpack(config.webpack.run))
+		.pipe(gulp.dest('public/assets/js'));
 });

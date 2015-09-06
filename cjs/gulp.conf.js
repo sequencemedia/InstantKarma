@@ -1,6 +1,6 @@
 module.exports =  {
 	jshint: {
-		all: ['client/app/**/*.js', 'server/app/**/*.js']
+		all: ['client/app/**/*.js', '*.js']
 	},
 	karma: {
 		run: {
