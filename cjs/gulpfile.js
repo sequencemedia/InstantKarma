@@ -2,7 +2,6 @@ var gulp = require('gulp'),
 	path = require('path'),
 	config = require('./gulp.conf'),
 	jshint = require('gulp-jshint'),
-	uglify = require('gulp-uglify'),
 	server = require('gulp-develop-server'),
 	karma = require('gulp-karma');
 
@@ -30,18 +29,10 @@ gulp.task('server', function () {
 
 gulp.task('watch', function () {
 	gulp
-		.watch(config.jshint.all, ['lint']);
-	gulp
-		.watch(config.jshint.all, ['test']);
+		.watch(config.jshint.all, ['lint', 'test']);
 });
 
 gulp.task('watch-server', function () {
 	gulp
 		.watch(['app'], server.restart);
-});
-
-gulp.task('webpack', function () {
-	return gulp.src([])
-		.pipe(webpack(config.webpack.run))
-		.pipe(gulp.dest('public/assets/js'));
 });

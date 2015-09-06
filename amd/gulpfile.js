@@ -2,7 +2,6 @@ var gulp = require('gulp'),
 	path = require('path'),
 	config = require('./gulp.conf'),
 	jshint = require('gulp-jshint'),
-	uglify = require('gulp-uglify'),
 	server = require('gulp-develop-server'),
 	karma = require('gulp-karma');
 
