@@ -7,7 +7,7 @@
 		assetsPath = path.resolve(publicPath, 'assets'),
 		server = http.createServer(app);
 
-	app.set('port', (process.env.PORT || 5000));
+	app.set('port', (process.env.PORT || 5001));
 	app.use('/assets', express.static(assetsPath));
 
 	app.get('/', function (req, res) {

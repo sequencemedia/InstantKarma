@@ -31,7 +31,7 @@ module.exports = function(config) {
 			'client/app/angular/**/*.routes.js',
 			'client/app/angular/**/*.controller.js',
 			/*
-				Everything else
+				Vanilla Components
 			*/
 			'client/app/vanilla/**/*.js',
 			/*
