@@ -34,5 +34,5 @@ gulp.task('watch', function () {
 
 gulp.task('watch-server', function () {
 	gulp
-		.watch(['app'], server.restart);
+		.watch(['app.js'], server.restart);
 });

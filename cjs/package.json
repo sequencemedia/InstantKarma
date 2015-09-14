@@ -1,13 +1,17 @@
 {
   "name": "instant-karma",
   "version": "0.1.0",
-  "description": "",
+  "description": "Instant Karma (CJS)",
   "main": "app.js",
   "scripts": {
     "start": "gulp",
     "test": "gulp test"
   },
-  "author": "Jonathan Perry",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sequencemedia/InstantKarma.git"
+  },
+  "author": "Jonathan Perry for Sequence Media Limited",
   "license": "MIT",
   "dependencies": {
     "express": "^4.12.3"
