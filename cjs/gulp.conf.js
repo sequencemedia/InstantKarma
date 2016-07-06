@@ -1,14 +1,17 @@
+var path = require('path'),
+	configFile = path.resolve(process.cwd(), 'karma.conf.js');
+
 module.exports =  {
 	jshint: {
 		all: ['client/app/**/*.js']
 	},
 	karma: {
 		run: {
-			configFile: 'karma.conf.js',
-			action: 'run'
+			configFile: configFile,
+    		action: 'run'
 		},
 		watch: {
-			configFile: 'karma.conf.js',
+			configFile: configFile,
 			action: 'watch'
 		}
 	}
