@@ -16,7 +16,8 @@ gulp.task('lint', function () {
 });
 
 gulp.task('test', function (next) {
-	new karma.Server(config.karma.run, next).start()
+	(new karma.Server(config.karma.run, next))
+		.start();
 });
 
 gulp.task('server', function () {
