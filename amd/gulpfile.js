@@ -3,7 +3,7 @@ var gulp = require('gulp'),
 	config = require('./gulp.conf'),
 	jshint = require('gulp-jshint'),
 	server = require('gulp-develop-server'),
-	karma = require('gulp-karma');
+	karma = require('karma');
 
 gulp.task('default', ['watch', 'server', 'watch-server', 'lint', 'test'], function () {
 
@@ -15,12 +15,9 @@ gulp.task('lint', function () {
 		.pipe(jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('test', function () {
-	return gulp.src([])
-		.pipe(karma(config.karma.run))
-		.on('error', function (err) {
-			this.emit('end', err);
-		});
+gulp.task('test', function (next) {
+	(new karma.Server(config.karma.run, next))
+		.start();
 });
 
 gulp.task('server', function () {
@@ -34,5 +31,5 @@ gulp.task('watch', function () {
 
 gulp.task('watch-server', function () {
 	gulp
-		.watch(['app'], server.restart);
+		.watch(['app.js'], server.restart);
 });

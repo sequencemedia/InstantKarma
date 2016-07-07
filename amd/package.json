@@ -1,41 +1,44 @@
 {
-  "name": "instant-karma",
-  "version": "0.1.0",
-  "description": "",
+  "name": "instant-karma-amd",
+  "version": "0.2.0",
+  "description": "Instant Karma (AMD)",
   "main": "app.js",
   "scripts": {
     "start": "gulp",
     "test": "gulp test"
   },
-  "author": "Jonathan Perry",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sequencemedia/InstantKarma.git"
+  },
+  "author": "Jonathan Perry for Sequence Media Limited",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.12.3"
+    "express": "^4.14.0"
   },
   "devDependencies": {
-    "angular": "^1.4.5",
-    "angular-mocks": "^1.4.5",
+    "angular": "^1.5.7",
+    "angular-mocks": "^1.5.7",
     "bardjs": "^0.1.8",
-    "chai": "^3.2.0",
-    "gulp": "^3.8.11",
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
     "gulp-compass": "^2.1.0",
-    "gulp-develop-server": "^0.4.3",
-    "gulp-jshint": "^1.10.0",
-    "gulp-karma": "0.0.4",
-    "http-proxy": "^1.11.2",
-    "jshint-stylish": "^1.0.2",
-    "karma": "^0.13.9",
+    "gulp-develop-server": "^0.5.2",
+    "gulp-jshint": "^2.0.1",
+    "http-proxy": "^1.14.0",
+    "jshint": "^2.9.2",
+    "jshint-stylish": "^2.2.0",
+    "karma": "^0.13.22",
     "karma-chai": "^0.1.0",
     "karma-chai-sinon": "^0.1.5",
-    "karma-commonjs": "^0.0.13",
-    "karma-mocha": "^0.2.0",
-    "karma-mocha-chai-sinon": "0.0.7",
-    "karma-phantomjs-launcher": "^0.2.1",
-    "karma-requirejs": "^0.2.2",
-    "mocha": "^2.3.0",
-    "phantomjs": "^1.9.18",
-    "requirejs": "^2.1.20",
-    "sinon": "^1.16.1",
+    "karma-commonjs": "^1.0.0",
+    "karma-mocha": "^1.1.1",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "karma-requirejs": "^1.0.0",
+    "mocha": "^2.5.3",
+    "phantomjs": "^2.1.7",
+    "requirejs": "^2.2.0",
+    "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0"
   }
 }
