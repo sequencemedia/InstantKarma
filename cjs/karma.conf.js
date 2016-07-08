@@ -1,10 +1,13 @@
+/* eslint-disable */
+
 // Karma configuration
 
-module.exports = function(config) {
+module.exports = function (config) {
+
 	config.set({
 
 		// base path that will be used to resolve all patterns (eg. files, exclude)
-		basePath: '',
+		basePath: process.cwd(), // '',
 
 
 		// frameworks to use
@@ -41,6 +44,17 @@ module.exports = function(config) {
 		],
 
 
+		plugins: [
+			'karma-chai',
+			'karma-chai-sinon',
+			'karma-commonjs',
+			'karma-mocha',
+			'karma-phantomjs-launcher',
+			'karma-requirejs',
+			'karma-spec-reporter'
+		],
+
+
 		// list of files to exclude
 		exclude: ['node_modules'],
 
@@ -55,7 +69,7 @@ module.exports = function(config) {
 		// test results reporter to use
 		// possible values: 'dots', 'progress'
 		// available reporters: https://npmjs.org/browse/keyword/karma-reporter
-		reporters: ['progress'],
+		reporters: ['spec'], // , 'progress', coverage'],
 
 
 		// web server port
@@ -83,5 +97,7 @@ module.exports = function(config) {
 		// Continuous Integration mode
 		// if true, Karma captures browsers, runs the tests and exits
 		singleRun: false
+
 	});
+
 };
