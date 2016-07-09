@@ -6,7 +6,8 @@ var path = require('path'),
 	processCwd = process.cwd(),
 	clientPath = path.resolve(processCwd, 'client'),
 	assetsPath = path.resolve(processCwd, 'public/assets'),
-	webpack = require('webpack');
+	webpack = require('webpack'),
+	isparta = require('isparta');
 
 module.exports = function (config) {
 
@@ -18,50 +19,44 @@ module.exports = function (config) {
 
 		// frameworks to use
 		// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-		frameworks: ['mocha', 'requirejs', 'chai', 'chai-sinon'],
+		frameworks: ['mocha', 'chai', 'phantomjs-shim', 'es6-shim'],
 
 
 		// list of files / patterns to load in the browser
 		files: [
-			/*
-				Always
-			*/
-			'test-main.js',
-			'node_modules/phantomjs-polyfill/bind-polyfill.js',
-			/*
-				Specs
-			*/
-			{ pattern: 'client/app/**/*.spec.js', included: false }
+			'./karma.coverage.js'
 		],
 
 
 		plugins: [
 			'karma-chai',
-			'karma-chai-sinon',
-			'karma-commonjs',
+			'karma-chrome-launcher',
+			'karma-coverage',
+			'karma-es6-shim',
 			'karma-mocha',
 			'karma-phantomjs-launcher',
-			'karma-requirejs',
+			'karma-phantomjs-shim',
+			'karma-sourcemap-loader',
 			'karma-spec-reporter',
 			'karma-webpack'
 		],
 
 
 		// list of files to exclude
-		exclude: ['node_modules'],
+		exclude: ['node_modules', 'bower_components'],
 
 
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
-			'client/app/**/*.js': ['webpack']
+			'./karma.coverage.js': ['webpack', 'sourcemap']
 		},
 
 
 		// test results reporter to use
 		// possible values: 'dots', 'progress'
 		// available reporters: https://npmjs.org/browse/keyword/karma-reporter
-		reporters: ['spec'], // , 'progress', coverage'],
+		reporters: ['spec', 'coverage'], // , 'progress', 'coverage'],
 
 
 		// web server port
@@ -78,7 +73,7 @@ module.exports = function (config) {
 
 
 		// enable / disable watching file and executing tests whenever any file changes
-		autoWatch: true,
+		autoWatch: false,
 
 
 		// start these browsers
@@ -88,39 +83,55 @@ module.exports = function (config) {
 
 		// Continuous Integration mode
 		// if true, Karma captures browsers, runs the tests and exits
-		singleRun: false,
+		singleRun: true,
+
+
+		coverageReporter: {
+			instrumenters: {
+				isparta: isparta
+			},
+			instrumenter: {
+				'**/*.js': 'isparta'
+			}
+		},
+
 
 		// webpack configuration
 		// nearly identical to webpack.conf.js
 		webpack: {
 			context: processCwd,
 			devtool: 'sourcemap',
-			entry: [
-				path.resolve(clientPath, 'app/vanilla/app')
-			],
-			output: {
-				path: path.resolve(assetsPath),
-				filename: '[name].js',
-				publicPath: path.resolve(assetsPath)
-			},
-			node: {
-				console: true,
-				fs: 'empty',
-				net: 'empty',
-				tls: 'empty'
-			},
-			resolve: {
-				extensions: ['', '.js'] // empty string is ESSENTIAL
-			},
 			module: {
+				preLoaders: [
+					{
+						test: /\.js$/,
+						loader: 'babel',
+						exclude: [
+							clientPath,
+							/node_modules/,
+							/bower_components/
+						]
+					}, {
+						test: /\.js$/,
+						loader: 'isparta',
+						include: [
+							clientPath,
+						],
+						exclude: [
+							/spec\.js$/, // exclude test files from coverage
+							/node_modules/,
+							/bower_components/
+						]
+					}
+				],
 				loaders: [
 					{
 						test: /\.js?$/,
+						loader: 'babel',
 						exclude: [
 							/node_modules/,
 							/bower_components/
-						],
-						loader: 'babel'
+						]
 					}
 				]
 			},
@@ -134,7 +145,7 @@ module.exports = function (config) {
 					mangle: false,
 					preserveComments: false,
 					warnings: false,
-					output: false
+					comments: false
 				}),
 				new webpack.ProvidePlugin({
 					'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'

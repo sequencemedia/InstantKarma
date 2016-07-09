@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 var allTestFiles = [];
 var TEST_REGEXP = /(spec|test)\.js$/i;
 

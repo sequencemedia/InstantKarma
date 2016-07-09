@@ -12,7 +12,7 @@ var gulp = require('gulp'),
 	karma = require('karma');
 
 gulp
-	.task('default', ['webpack', 'watch', 'server', 'watch-server', 'lint', 'test'], function () {
+	.task('default', ['webpack', 'watch', 'server', 'watch-server', 'lint', 'test-coverage'], function () {
 
 	})
 	.task('webpack', function () {
@@ -22,7 +22,7 @@ gulp
 	})
 	.task('watch', function () {
 		gulp
-			.watch(config.jshint.all, ['lint', 'test']);
+			.watch(config.eslint.all, ['lint', 'test']);
 	})
 	.task('server', function () {
 		server.listen({ path: 'app' });
@@ -32,11 +32,15 @@ gulp
 			.watch(['app.js'], server.restart);
 	})
 	.task('lint', function () {
-		return gulp.src(['client/app/**/*.js','!node_modules/**'])
+		return gulp.src(config.eslint.all)
 			.pipe(eslint())
 			.pipe(eslint.format());
 	})
 	.task('test', function (next) {
 		(new karma.Server(config.karma.run, next))
+			.start();
+	})
+	.task('test-coverage', function (next) {
+		(new karma.Server(config.karma.coverage.run, next))
 			.start();
 	});

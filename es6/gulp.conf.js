@@ -1,9 +1,11 @@
+/* eslint-disable */
+
 var path = require('path'),
 	configFile = path.resolve(process.cwd(), 'karma.conf.js');
 
 module.exports =  {
-	jshint: {
-		all: ['client/app/**/*.js']
+	eslint: {
+		all: ['client/app/**/*.js', '!node_modules/**', '!bower_components/**']
 	},
 	karma: {
 		run: {
@@ -13,6 +15,12 @@ module.exports =  {
 		watch: {
 			configFile: configFile,
 			action: 'watch'
+		},
+		coverage: {
+			run: {
+				configFile: path.resolve(process.cwd(), 'karma.coverage.conf.js'),
+	    		action: 'run'
+			}
 		}
 	},
 	webpack: {
