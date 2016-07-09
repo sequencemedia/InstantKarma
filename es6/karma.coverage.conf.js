@@ -145,7 +145,7 @@ module.exports = function (config) {
 					mangle: false,
 					preserveComments: false,
 					warnings: false,
-					comments: false
+					output: false
 				}),
 				new webpack.ProvidePlugin({
 					'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
