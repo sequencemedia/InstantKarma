@@ -18,7 +18,7 @@ module.exports = function (config) {
 
 		// frameworks to use
 		// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-		frameworks: ['mocha', 'requirejs', 'chai', 'chai-sinon'],
+		frameworks: ['mocha', 'requirejs', 'chai', 'chai-sinon', 'phantomjs-shim', 'es6-shim'],
 
 
 		// list of files / patterns to load in the browser
@@ -39,9 +39,12 @@ module.exports = function (config) {
 			'karma-chai',
 			'karma-chai-sinon',
 			'karma-commonjs',
+			'karma-es6-shim',
 			'karma-mocha',
 			'karma-phantomjs-launcher',
+			'karma-phantomjs-shim',
 			'karma-requirejs',
+			'karma-sourcemap-loader',
 			'karma-spec-reporter',
 			'karma-webpack'
 		],
@@ -54,7 +57,7 @@ module.exports = function (config) {
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
-			'client/app/**/*.js': ['webpack']
+			'client/app/**/*.js': ['webpack', 'sourcemap']
 		},
 
 
@@ -91,24 +94,9 @@ module.exports = function (config) {
 		singleRun: false,
 
 		// webpack configuration
-		// nearly identical to webpack.conf.js
+		// for babel
 		webpack: {
-			context: processCwd,
 			devtool: 'sourcemap',
-			entry: [
-				path.resolve(clientPath, 'app/vanilla/app')
-			],
-			output: {
-				path: path.resolve(assetsPath),
-				filename: '[name].js',
-				publicPath: path.resolve(assetsPath)
-			},
-			node: {
-				console: true,
-				fs: 'empty',
-				net: 'empty',
-				tls: 'empty'
-			},
 			resolve: {
 				extensions: ['', '.js'] // empty string is ESSENTIAL
 			},
@@ -123,23 +111,7 @@ module.exports = function (config) {
 						loader: 'babel'
 					}
 				]
-			},
-			plugins: [
-				new webpack.DefinePlugin({
-					'process.env': {
-						NODE_ENV: JSON.stringify('production')
-					}
-				}),
-				new webpack.optimize.UglifyJsPlugin({
-					mangle: false,
-					preserveComments: false,
-					warnings: false,
-					output: false
-				}),
-				new webpack.ProvidePlugin({
-					'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-				})
-			]
+			}
 		},
 		webpackServer: {
 			noInfo: true

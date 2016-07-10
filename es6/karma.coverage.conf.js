@@ -97,9 +97,8 @@ module.exports = function (config) {
 
 
 		// webpack configuration
-		// nearly identical to webpack.conf.js
+		// for babel
 		webpack: {
-			context: processCwd,
 			devtool: 'sourcemap',
 			module: {
 				preLoaders: [
@@ -134,23 +133,7 @@ module.exports = function (config) {
 						]
 					}
 				]
-			},
-			plugins: [
-				new webpack.DefinePlugin({
-					'process.env': {
-						NODE_ENV: JSON.stringify('production')
-					}
-				}),
-				new webpack.optimize.UglifyJsPlugin({
-					mangle: false,
-					preserveComments: false,
-					warnings: false,
-					output: false
-				}),
-				new webpack.ProvidePlugin({
-					'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-				})
-			]
+			}
 		},
 		webpackServer: {
 			noInfo: true
