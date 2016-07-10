@@ -12,15 +12,11 @@ module.exports = function (config) {
 
 		// frameworks to use
 		// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-		frameworks: ['mocha', 'requirejs', 'commonjs', 'chai', 'chai-sinon'],
+		frameworks: ['mocha', 'chai', 'sinon', 'commonjs'],
 
 
 		// list of files / patterns to load in the browser
 		files: [
-			/*
-				Always
-			*/
-			'test-main.js',
 			/*
 				Always for Angular
 			*/
@@ -40,7 +36,7 @@ module.exports = function (config) {
 			/*
 				Specs
 			*/
-			{ pattern: 'client/app/**/*.spec.js', included: true }
+			'client/app/**/*.spec.js'
 		],
 
 
@@ -50,7 +46,7 @@ module.exports = function (config) {
 			'karma-commonjs',
 			'karma-mocha',
 			'karma-phantomjs-launcher',
-			'karma-requirejs',
+			'karma-sinon',
 			'karma-spec-reporter'
 		],
 

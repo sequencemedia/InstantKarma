@@ -19,23 +19,30 @@ module.exports = function (config) {
 
 		// frameworks to use
 		// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-		frameworks: ['mocha', 'chai', 'phantomjs-shim', 'es6-shim'],
+		frameworks: ['mocha', 'chai', 'sinon', 'phantomjs-shim', 'es6-shim'],
 
 
 		// list of files / patterns to load in the browser
 		files: [
-			'./karma.coverage.js'
+			/*
+				Always
+			*/
+			'node_modules/phantomjs-polyfill/bind-polyfill.js',
+			/*
+				Specs
+			*/
+			'client/app/**/*.spec.js'
 		],
 
 
 		plugins: [
 			'karma-chai',
-			'karma-chrome-launcher',
 			'karma-coverage',
 			'karma-es6-shim',
 			'karma-mocha',
 			'karma-phantomjs-launcher',
 			'karma-phantomjs-shim',
+			'karma-sinon',
 			'karma-sourcemap-loader',
 			'karma-spec-reporter',
 			'karma-webpack'
@@ -49,14 +56,14 @@ module.exports = function (config) {
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
-			'./karma.coverage.js': ['webpack', 'sourcemap']
+			'client/app/**/*.js': ['webpack', 'sourcemap']
 		},
 
 
 		// test results reporter to use
 		// possible values: 'dots', 'progress'
 		// available reporters: https://npmjs.org/browse/keyword/karma-reporter
-		reporters: ['spec', 'coverage'], // , 'progress', 'coverage'],
+		reporters: ['spec', 'coverage'], //, ['spec', 'progress', coverage'],
 
 
 		// web server port
@@ -73,7 +80,7 @@ module.exports = function (config) {
 
 
 		// enable / disable watching file and executing tests whenever any file changes
-		autoWatch: false,
+		autoWatch: true,
 
 
 		// start these browsers
@@ -83,7 +90,7 @@ module.exports = function (config) {
 
 		// Continuous Integration mode
 		// if true, Karma captures browsers, runs the tests and exits
-		singleRun: true,
+		singleRun: false,
 
 
 		coverageReporter: {

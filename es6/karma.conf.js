@@ -18,7 +18,7 @@ module.exports = function (config) {
 
 		// frameworks to use
 		// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-		frameworks: ['mocha', 'requirejs', 'chai', 'chai-sinon', 'phantomjs-shim', 'es6-shim'],
+		frameworks: ['mocha', 'chai', 'sinon', 'phantomjs-shim', 'es6-shim'],
 
 
 		// list of files / patterns to load in the browser
@@ -26,24 +26,21 @@ module.exports = function (config) {
 			/*
 				Always
 			*/
-			'test-main.js',
 			'node_modules/phantomjs-polyfill/bind-polyfill.js',
 			/*
 				Specs
 			*/
-			{ pattern: 'client/app/**/*.spec.js', included: false }
+			'client/app/**/*.spec.js'
 		],
 
 
 		plugins: [
 			'karma-chai',
-			'karma-chai-sinon',
-			'karma-commonjs',
 			'karma-es6-shim',
 			'karma-mocha',
 			'karma-phantomjs-launcher',
 			'karma-phantomjs-shim',
-			'karma-requirejs',
+			'karma-sinon',
 			'karma-sourcemap-loader',
 			'karma-spec-reporter',
 			'karma-webpack'
@@ -51,7 +48,7 @@ module.exports = function (config) {
 
 
 		// list of files to exclude
-		exclude: ['node_modules'],
+		exclude: ['node_modules', 'bower_components'],
 
 
 		// preprocess matching files before serving them to the browser
@@ -64,7 +61,7 @@ module.exports = function (config) {
 		// test results reporter to use
 		// possible values: 'dots', 'progress'
 		// available reporters: https://npmjs.org/browse/keyword/karma-reporter
-		reporters: ['spec'], // , 'progress', coverage'],
+		reporters: ['spec'], //, ['spec', 'progress', coverage'],
 
 
 		// web server port
@@ -93,22 +90,20 @@ module.exports = function (config) {
 		// if true, Karma captures browsers, runs the tests and exits
 		singleRun: false,
 
+
 		// webpack configuration
 		// for babel
 		webpack: {
 			devtool: 'sourcemap',
-			resolve: {
-				extensions: ['', '.js'] // empty string is ESSENTIAL
-			},
 			module: {
 				loaders: [
 					{
 						test: /\.js?$/,
+						loader: 'babel',
 						exclude: [
 							/node_modules/,
 							/bower_components/
-						],
-						loader: 'babel'
+						]
 					}
 				]
 			}
